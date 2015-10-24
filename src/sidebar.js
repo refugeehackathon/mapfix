@@ -33,7 +33,7 @@ export default class Sidebar extends React.Component {
   render() {
     return (
       <div className="sidebar-container">
-        <CategoryIcon type="Fun"/>
+        <CategoryIcon type="fun"/>
       </div>
     );
   }

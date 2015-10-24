@@ -1,18 +1,8 @@
 import React from 'react';
-import Mapper from './mapper';
-import Leaflet from 'leaflet';
+import {Map, Marker, Popup, TileLayer} from 'react-leaflet';
 import {DropTarget as dropTarget} from 'react-dnd';
 
 import './map-container.css';
-
-const DEFAULT_ICON = Leaflet.icon({
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconSize: [25, 41],
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-  shadowRetinaUrl: require('leaflet/dist/images/marker-shadow.png'),
-  shadowSize: [41, 41],
-});
 
 class DropListener {
   listener = null
@@ -32,10 +22,11 @@ const cardTarget = {
   },
 };
 
+let nextMarkerId = 2;
+
 @dropTarget('CategoryIcon', cardTarget, (connect) => ({
   connectDropTarget: connect.dropTarget(),
 }))
-
 export default class MapContainer extends React.Component {
 
   static propTypes = {
@@ -44,18 +35,12 @@ export default class MapContainer extends React.Component {
 
   state = {
     markers: [
-      [51.505, -0.09],
-      [52.51, 13.37],
+      {id: 1, latlng: [52.51, 13.37], type: 'fun'},
     ],
+    openMarkerId: null,
   }
 
   componentDidMount() {
-    const node = React.findDOMNode(this);
-    this.map = new Mapper(node);
-    this.setMarkers();
-
-    this.map.on('click', this.handleMapClick);
-
     dropListener.listener = ({type, x, y}) => {
       this.justDroppedType = type;
       const evt = new MouseEvent('click', {clientX: x, clientY: y});
@@ -65,25 +50,50 @@ export default class MapContainer extends React.Component {
   }
 
   componentDidUpdate() {
-    this.setMarkers();
-  }
-
-  setMarkers() {
-    if (this.markers) this.markers.forEach(marker => this.map.removeLayer(marker));
-    this.markers = this.state.markers.map(pos => Leaflet.marker(pos, {icon: DEFAULT_ICON}).addTo(this.map));
+    const popupMarkerComp = this.refs.popupMarker;
+    popupMarkerComp.leafletElement.openPopup();
   }
 
   handleMapClick = event => {
     if (!this.justDroppedType) return; // it has been a normal click, not a synthetic one
+    this.setState({markers: [...this.state.markers, {id: nextMarkerId, latlng: event.latlng, type: this.justDroppedType}], openMarkerId: nextMarkerId});
     this.justDroppedType = null;
-    this.setState({markers: [...this.state.markers, event.latlng]});
+    nextMarkerId += 1;
+  }
+
+  renderMarker(marker) {
+    const {openMarkerId} = this.state;
+    if (marker.id === openMarkerId) {
+      return (
+        <Marker ref="popupMarker" position={marker.latlng} key={marker.id}>
+          <Popup>
+            <div>
+              <input/>
+              <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
+            </div>
+          </Popup>
+        </Marker>
+      );
+    }
+    return <Marker position={marker.latlng} key={marker.id}/>;
   }
 
   render() {
     const {connectDropTarget} = this.props;
+    const {markers} = this.state;
 
     return connectDropTarget(
-      <div className="map-container"/>
+      <Map className="map-container" center={[52.51, 13.37]} zoom={13} onLeafletClick={this.handleMapClick}>
+        <TileLayer
+          url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}"
+          attribution="<a href='//openstreetmap.org' target='_blank'>OpenStreetMap</a> | <a href='//mapbox.com' target='_blank'>Mapbox</a>"
+          accessToken="pk.eyJ1IjoiZG9uc2Nob2UiLCJhIjoiMkN5RUk0QSJ9.FGcEYWjfgcJUmSyN1tkwgQ"
+          noWrap
+          continuousWorld={false}
+          id="mapbox.light"
+        />
+        {markers.map(marker => this.renderMarker(marker))}
+      </Map>
     );
   }
 }
