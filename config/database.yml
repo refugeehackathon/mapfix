@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: mapping_tool_dev
+  username: mapping_tool
+  password:
+  host: localhost
