@@ -13,7 +13,7 @@ export default class MapContainer extends React.Component {
 
   render() {
     return (
-      <div id="map" />
+      <div className="map-container"/>
     );
   }
 }

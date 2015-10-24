@@ -3,9 +3,8 @@ import Leaflet from 'leaflet';
 export default class Mapper extends Leaflet.Class {
 
   constructor(domNode) {
-    super(domNode);
-
-    const map = Leaflet.map('map', {
+    super();
+    const map = Leaflet.map(domNode, {
       minZoom: 1,
       maxZoom: 18,
       noWrap: true,
