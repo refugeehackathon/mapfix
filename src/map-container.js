@@ -1,6 +1,7 @@
 import React from 'react';
-import {Map, Marker, Popup, TileLayer} from 'react-leaflet';
+import {Map, Marker, TileLayer} from 'react-leaflet';
 import {DropTarget as dropTarget} from 'react-dnd';
+import PopupContent from './popup-content';
 
 import './map-container.css';
 
@@ -50,8 +51,27 @@ export default class MapContainer extends React.Component {
   }
 
   componentDidUpdate() {
-    const popupMarkerComp = this.refs.popupMarker;
-    popupMarkerComp.leafletElement.openPopup();
+    const {openMarkerId} = this.state;
+    if (this.lastOpenMarkerId === openMarkerId) return;
+    this.unmountCurrentPopup();
+    if (openMarkerId) {
+      this.refs[`marker-${openMarkerId}`].getLeafletElement().bindPopup("<div id='popup'/>").openPopup();
+      this.openPopupNode = document.getElementById('popup');
+      React.render(<PopupContent markerId={openMarkerId}/>, this.openPopupNode);
+    }
+    this.lastOpenMarkerId = openMarkerId;
+  }
+
+  unmountCurrentPopup() {
+    if (this.lastOpenMarkerId && this.openPopupNode) {
+      React.unmountComponentAtNode(this.openPopupNode);
+      this.refs[`marker-${this.lastOpenMarkerId}`].getLeafletElement().unbindPopup();
+      this.openPopupNode = null;
+    }
+  }
+
+  handlePopupClose = () => {
+    this.unmountCurrentPopup();
   }
 
   handleMapClick = event => {
@@ -62,20 +82,7 @@ export default class MapContainer extends React.Component {
   }
 
   renderMarker(marker) {
-    const {openMarkerId} = this.state;
-    if (marker.id === openMarkerId) {
-      return (
-        <Marker ref="popupMarker" position={marker.latlng} key={marker.id}>
-          <Popup>
-            <div>
-              <input/>
-              <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
-            </div>
-          </Popup>
-        </Marker>
-      );
-    }
-    return <Marker position={marker.latlng} key={marker.id}/>;
+    return <Marker position={marker.latlng} key={marker.id} ref={`marker-${marker.id}`}/>;
   }
 
   render() {
@@ -83,7 +90,7 @@ export default class MapContainer extends React.Component {
     const {markers} = this.state;
 
     return connectDropTarget(
-      <Map className="map-container" center={[52.51, 13.37]} zoom={13} onLeafletClick={this.handleMapClick}>
+      <Map className="map-container" center={[52.51, 13.37]} zoom={13} onLeafletClick={this.handleMapClick} onLeafletPopupclose={this.handlePopupClose}>
         <TileLayer
           url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}"
           attribution="<a href='//openstreetmap.org' target='_blank'>OpenStreetMap</a> | <a href='//mapbox.com' target='_blank'>Mapbox</a>"
