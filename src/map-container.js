@@ -8,12 +8,12 @@ export default class MapContainer extends React.Component {
   static propTypes = {};
 
   componentDidMount() {
-    new Mapper().init();
+    this.map = new Mapper(React.findDOMNode(this));
   }
 
   render() {
     return (
-      <div id="map" className="map-container"/>
+      <div className="map-container"/>
     );
   }
 }
