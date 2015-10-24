@@ -1,6 +1,7 @@
 import React from 'react';
 import Mapper from './mapper';
 import Leaflet from 'leaflet';
+import {DropTarget as dropTarget} from 'react-dnd';
 
 import './map-container.css';
 
@@ -13,9 +14,33 @@ const DEFAULT_ICON = Leaflet.icon({
   shadowSize: [41, 41],
 });
 
+class DropListener {
+  listener = null
+
+  justDropped({type, x, y}) {
+    if (this.listener) this.listener({type, x, y});
+  }
+}
+
+const dropListener = new DropListener();
+
+const cardTarget = {
+  drop(props, monitor) {
+    const {type} = monitor.getItem();
+    const {x, y} = monitor.getClientOffset();
+    dropListener.justDropped({type, x, y});
+  },
+};
+
+@dropTarget('CategoryIcon', cardTarget, (connect) => ({
+  connectDropTarget: connect.dropTarget(),
+}))
+
 export default class MapContainer extends React.Component {
 
-  static propTypes = {};
+  static propTypes = {
+    connectDropTarget: React.PropTypes.func.isRequired,
+  };
 
   state = {
     markers: [
@@ -25,8 +50,18 @@ export default class MapContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.map = new Mapper(React.findDOMNode(this));
+    const node = React.findDOMNode(this);
+    this.map = new Mapper(node);
     this.setMarkers();
+
+    this.map.on('click', this.handleMapClick);
+
+    dropListener.listener = ({type, x, y}) => {
+      this.justDroppedType = type;
+      const evt = new MouseEvent('click', {clientX: x, clientY: y});
+      evt._simulated = true; // don't ask. Just believe me, it's necessary...
+      React.findDOMNode(this).dispatchEvent(evt);
+    };
   }
 
   componentDidUpdate() {
@@ -38,9 +73,16 @@ export default class MapContainer extends React.Component {
     this.markers = this.state.markers.map(pos => Leaflet.marker(pos, {icon: DEFAULT_ICON}).addTo(this.map));
   }
 
+  handleMapClick = event => {
+    if (!this.justDroppedType) return; // it has been a normal click, not a synthetic one
+    this.justDroppedType = null;
+    this.setState({markers: [...this.state.markers, event.latlng]});
+  }
 
   render() {
-    return (
+    const {connectDropTarget} = this.props;
+
+    return connectDropTarget(
       <div className="map-container"/>
     );
   }

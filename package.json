@@ -33,6 +33,7 @@
   "dependencies": {
     "leaflet": "^0.7.5",
     "normalize.css": "^3.0.3",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "react-dnd": "^1.1.8"
   }
 }
