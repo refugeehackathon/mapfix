@@ -1,0 +1,48 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+	"amenity": "bar"
+      },
+      "geometry": {
+	"type": "Point",
+	"coordinates": [
+	  13.43550682067871,
+	  52.51114109268442
+	]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+	"amenity": "shop"
+      },
+      "geometry": {
+	"type": "Point",
+	"coordinates": [
+	  13.435142040252686,
+	  52.512440473097584
+	]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+	"shop": "chocolate",
+	"comments": [
+	    "Ist teuer, aber lecker.",
+	    "Super!"
+	]
+      },
+      "geometry": {
+	"type": "Point",
+	"coordinates": [
+	  13.436890840530396,
+	  52.51209441071098
+	]
+      }
+    }
+  ]
+}
