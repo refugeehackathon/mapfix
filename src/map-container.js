@@ -20,13 +20,13 @@ export default class MapContainer extends React.Component {
   state = {
     markers: [
       [51.505, -0.09],
+      [52.51, 13.37],
     ],
   }
 
   componentDidMount() {
     this.map = new Mapper(React.findDOMNode(this));
     this.setMarkers();
-    // this.map.on('click', (e) => console.log('e', e));
   }
 
   componentDidUpdate() {
@@ -34,6 +34,7 @@ export default class MapContainer extends React.Component {
   }
 
   setMarkers() {
+    if (this.markers) this.markers.forEach(marker => this.map.removeLayer(marker));
     this.markers = this.state.markers.map(pos => Leaflet.marker(pos, {icon: DEFAULT_ICON}).addTo(this.map));
   }
 
