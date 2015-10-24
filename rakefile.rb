@@ -26,7 +26,7 @@ task :migrate_prod do
   puts "So whats #{a} + #{b}?"
   if STDIN.gets.to_i == a + b
     puts "well done! migrating now..."
-    # last_index = migrate "psql -h #{ENV["CODECKS_AWS_RDS_HOST"]} -p #{ENV["CODECKS_AWS_RDS_PORT"]} -U #{ENV["CODECKS_AWS_RDS_USER"]} -w #{ENV["CODECKS_AWS_RDS_DB"]}"
+    last_index = migrate "heroku pg:psql --app=frozen-woodland-3241"
     f = File.new File.join(File.dirname(__FILE__),"db/migrations/#{last_index+1}.sql"), "w"
     puts "migrated #{last_index} and created #{f}"
     File.delete *Dir["/tmp/mapping-tool--*.sql"]

@@ -1,0 +1,9 @@
+                                    Table "public.tags"
+   Column   |           Type           |                     Modifiers                     
+------------+--------------------------+---------------------------------------------------
+ id         | integer                  | not null default nextval('tags_id_seq'::regclass)
+ value      | text                     | not null
+ created_at | timestamp with time zone | not null default now()
+Indexes:
+    "tags_pkey" PRIMARY KEY, btree (id)
+
