@@ -22,7 +22,17 @@ to create in 5 min's a refugee city map
 
 ## API Server
 
+
+### Install
+
 - install ruby >= 2.2
 - `bundle install`
 
+### Run locally
 
+- `rackup`
+- access `localhost:9292`
+
+### Deploy
+
+`git push heroku [FEATUREBRANCHNAME]:master`
