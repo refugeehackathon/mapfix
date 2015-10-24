@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby "2.2.0"
+
 gem 'grape'
 gem 'activerecord', '~> 4.2.3', require: 'active_record'
 gem 'grape-activerecord'
