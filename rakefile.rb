@@ -1,14 +1,6 @@
 task :fetch_remote, [:force] do |t, args|
-  dump_file = "/tmp/mapping-tool--#{Time.now.strftime "%F"}.sql"
-  if !File.exist?(dump_file) || args[:force]
-    File.delete *Dir["/tmp/mapping-tool--*.sql"]
-    puts "dumping live data to: #{dump_file}"
-    # system "pg_dump -v -Fc -h #{ENV["CODECKS_AWS_RDS_HOST"]} -p #{ENV["CODECKS_AWS_RDS_PORT"]} -U #{ENV["CODECKS_AWS_RDS_USER"]} -w #{ENV["CODECKS_AWS_RDS_DB"]} > #{dump_file}"
-  end
-
   system "dropdb --if-exists -e mapping_tool_dev"
-  system "createdb -O mapping_tool -e mapping_tool_dev"
-  # system "pg_restore -e -d mapping_tool_dev --role mapping_tool < #{dump_file}"
+  system "heroku pg:pull DATABASE_URL mapping_tool_dev --app=frozen-woodland-3241"
 end
 
 def migrate(cmd)
