@@ -4,9 +4,9 @@ import 'leaflet/dist/leaflet.css';
 import './style.css';
 
 import React from 'react';
-import MapContainer from './map-container';
+import AppContainer from './app-container';
 
 window.document.addEventListener('DOMContentLoaded', () => {
   const appEl = window.document.getElementById('app');
-  React.render(<MapContainer/>, appEl);
+  React.render(<AppContainer/>, appEl);
 });
