@@ -27,5 +27,6 @@ export default class Mapper extends Leaflet.Class {
     tiles.addTo(map);
     map.setView([52.51, 13.37], 13);
     map.zoomControl.setPosition('bottomright');
+    return map;
   }
 }
