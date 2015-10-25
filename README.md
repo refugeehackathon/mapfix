@@ -7,6 +7,16 @@ Based on open street map - provide ready icons/symbols for points of interests
 legend explaining symbols in relevant refugee languages. Make it easy printable. 
 
 
+## Run
+
+Requires nodejs & npm.
+
+    npm install
+    npm start
+
+*not to be used in production (yet)*
+
+
 ## Contributors
 
 Project initialized by Anke Domscheit-Berg at the #refugeehackathon Berlin 2015.
