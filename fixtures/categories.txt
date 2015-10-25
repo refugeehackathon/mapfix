@@ -1,70 +1,117 @@
-papers
-    polizei
-    behörden
-    anwalt
+papers:
+    polizei:
+        amenity=police
+    behörden:
+        office=government
+    anwalt:
+        office=lawyer
 
-freizeit
-    park
-    club/konzert
-    sportplatz
-    sportverein
-    outdoor activity
-    fitness center
-    internet cafe
+freizeit:
+    park:
+        leisure=park
+    club/konzert:
+        leisure=bandstand
+    sportplatz:
+        leisure=pitch;sports_centre;stadium
+    sportverein:
+        office=association
+    outdoor activity:
+    fitness center:
+        leisure=sports_centre
+    internet cafe:
+        internet_access=yes|wired|wlan|terminal|no
 
-kommunikation
-    spätis
-    simkarten
-    free hotspots
-    money transfer
+kommunikation:
+    spätis:
+        shop=convenience
+    simkarten:
+        shop=mobile_phone
+    free hotspots:
+        internet_access:fee=no
+    money transfer:
+        amenity=money_transfer
 
-mobilität
-    öffis (bvg)
-    fahrradwerkstatt
-    mitfahrgelegenheit
-    fernbahnhöfe
-    bus und bahn
+mobilität:
+    öffis (bvg):
+        public_transport=stop_position;network=BVG
+    fahrradwerkstatt:
+        shop=bicycle
+        amenity=bicycle_repair_station
+    mitfahrgelegenheit:
+        amenity=car_sharing
+    fernbahnhöfe:
+        railway=station
+    bus und bahn:
+        type=public_transport
+        public_transport=stop_position;bus=yes|no;tram=yes|no
 
-shops
-    supermarkt
-    drogerie
-    flohmarkt
-    second hand läden
+shops:
+    supermarkt:
+        shop=supermarket
+    drogerie:
+        shop=chemist;amenity=pharmacy
+    flohmarkt:
+        amenity=marketplace;building=no;shop=clothes
+    second hand läden:
+        amenity=marketplace;building=yes;shop=clothes
 
-gesundheit
-    apotheke
-    arzt
-    therapie
-    hebamme
-    krankenhaus
+gesundheit:
+    apotheke:
+        amenity=pharmacy
+    arzt:
+        healthcare=doctor;healthcare=dentist
+    therapie:
+        amenity=doctors;healthcare=doctor;healthcare=psychotherapist
+    hebamme:
+        healthcare=midwife
+    krankenhaus:
+        healthcare=hospital
 
-support
-    arbeit
-    flüchtlingsinitiative
-    beratunsstelle
-    frauenberatung
-    transitsupport
-    dolmetscher
+support:
+    arbeit:
+        office=employment_agency
+    flüchtlingsinitiative:
+    beratungsstelle:
+        amenity=social_facility
+    frauenberatung:
+        amenity=social_facility
+    transitsupport:
+    dolmetscher:
 
-bildung
-    sprachkurse
-    bildungsorientierung
-    flüchtlingsunis
+bildung:
+    sprachkurse:
+        amenity=school
+    bildungsorientierung:
+        amenity=school
+    flüchtlingsunis:
+        amenity=school;amenity=university
 
-needs (grundbedürfnisse)
-    öffentliche duschen
-    öffentliche toiletten
-    bahnhofsmission
-    obdachlosenunterkunft
-    tafel
+needs (grundbedürfnisse):
+    öffentliche duschen:
+        amenity=shower;fee=no
+    öffentliche toiletten:
+        amenity=toilets;fee=no
+    bahnhofsmission:
+        social_facility=shelter
+    obdachlosenunterkunft:
+        social_facility=shelter;social_facility:for=homeless
+    tafel:
+        amenity=social_facility
 
-community
-    religiöse gemeinde
-    kulturvereine
+community:
+    religiöse gemeinde:
+        amenity=place_of_worship
+    kulturvereine:
+        amenity=arts_center;community_centre
 
-family
-    familienzentren
-    spielplatz
-    schule
-    kita
-    kindergarten
+family:
+    familienzentren:
+        amenity=community_centre
+    spielplatz:
+        leisure=playground
+    schule:
+        amenity=school
+    kita:
+        amenity=kindergarten
+    kindergarten:
+        amenity=kindergarten
