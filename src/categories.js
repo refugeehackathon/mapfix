@@ -13,20 +13,6 @@ export default {
     },
     'icon': 'icon_playgruond.svg',
   },
-  'kommunikation': {
-    'name': {
-      'de': 'Kommunikation',
-      'en': 'Communication',
-    },
-    'icon': 'pinpoint.svg',
-  },
-  'mobilität': {
-    'name': {
-      'de': 'Mobilität',
-      'en': 'Mobility',
-    },
-    'icon': 'pinpoint.svg',
-  },
   'shops': {
     'name': {
       'de': 'Shops',

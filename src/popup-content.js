@@ -12,7 +12,7 @@ export default class PopupContent extends React.Component {
           <div>
             <img src={require('./icons/placeholder-150x93.jpg')}/><br />
             <input id="popup-input" type="text" name="name" />&nbsp;
-            <button onClick={() => this.props.onClose()}>:-)</button>
+            <button>:-)</button>
           </div>
       </div>
     );
