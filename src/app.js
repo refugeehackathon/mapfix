@@ -2,6 +2,7 @@ import 'babel-core/polyfill';
 import 'normalize.css/normalize.css';
 import 'leaflet/dist/leaflet.css';
 import './style.css';
+import './print.css';
 
 import React from 'react';
 import AppContainer from './app-container';

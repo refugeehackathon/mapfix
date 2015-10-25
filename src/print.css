@@ -1,0 +1,6 @@
+@media print {
+  .leaflet-control,
+  .sidebar-container {
+    display: none;
+  }
+}
