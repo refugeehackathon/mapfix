@@ -21,6 +21,19 @@
 .sidebar-category-container {
   flex-shrink: 0;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar-category-icon {
+  height: 40px;
+  width: 40px;
+}
+
+.sidebar-category-label {
+  text-transform: uppercase;
+  font-size: 12px;
 }
 
 @media (max-width: 800px) {

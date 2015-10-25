@@ -3,9 +3,25 @@ import {Map, Marker, TileLayer} from 'react-leaflet';
 import Leaflet from 'leaflet';
 import {DropTarget as dropTarget} from 'react-dnd';
 import PopupContent from './popup-content';
+import categories from './categories.js';
+import i18n from './i18n.js';
 
 import './map-container.css';
 import 'leaflet.locatecontrol';
+
+const iconToCategory = Object.keys(categories).reduce(
+  (memo, catName) => {
+    const description = categories[catName];
+    memo[catName] = Leaflet.icon({
+      iconUrl: require('./icons/' + description.icon),
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+      popupAnchor: [0, -50],
+    });
+    return memo;
+  },
+  {}
+);
 
 class DropListener {
   listener = null;
@@ -26,25 +42,35 @@ const cardTarget = {
 };
 
 let nextMarkerId = 2;
+let userLanguage = window.navigator.languages ? window.navigator.languages[0] : null;
+userLanguage = userLanguage || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage;
+if (userLanguage.indexOf('-') !== -1) {
+  userLanguage = userLanguage.split('-')[0];
+}
+if (userLanguage.indexOf('_') !== -1) {
+  userLanguage = userLanguage.split('_')[0];
+}
 
 @dropTarget('CategoryIcon', cardTarget, (connect) => ({
   connectDropTarget: connect.dropTarget(),
 }))
+
 export default class MapContainer extends React.Component {
 
   static propTypes = {
     connectDropTarget: React.PropTypes.func.isRequired,
+    markers: React.PropTypes.array.isRequired,
+    onMarkersChange: React.PropTypes.func.isRequired,
   };
 
   state = {
-    markers: [
-      {id: 1, latlng: [52.51, 13.37], type: 'fun'},
-    ],
     openMarkerId: null,
   }
 
   componentDidMount() {
-    Leaflet.control.locate().addTo(this.refs.map.getLeafletElement());
+    const locateMeStringRoot = i18n.leaflet.locateme;
+    const locateMeString = locateMeStringRoot.hasOwnProperty(userLanguage) ? locateMeStringRoot[userLanguage] : locateMeStringRoot.en;
+    Leaflet.control.locate({strings: { title: locateMeString}}).addTo(this.refs.map.getLeafletElement());
     dropListener.listener = ({type, x, y}) => {
       this.justDroppedType = type;
       const evt = new MouseEvent('click', {clientX: x, clientY: y});
@@ -79,20 +105,22 @@ export default class MapContainer extends React.Component {
 
   handleMapClick = event => {
     if (!this.justDroppedType) return; // it has been a normal click, not a synthetic one
-    this.setState({markers: [...this.state.markers, {id: nextMarkerId, latlng: event.latlng, type: this.justDroppedType}], openMarkerId: nextMarkerId});
+    this.props.onMarkersChange([...this.props.markers, {id: nextMarkerId, latlng: event.latlng, type: this.justDroppedType}]);
+    this.setState({openMarkerId: nextMarkerId});
     this.justDroppedType = null;
     nextMarkerId += 1;
   }
 
   handleMarkerDragEnd = (event, markerId) => {
-    const {markers} = this.state;
+    const {markers} = this.props;
     markers.find(marker => marker.id === markerId).latlng = event.target._latlng;
-    this.setState({markers});
+    this.props.onMarkersChange(markers);
   }
 
   renderMarker(marker) {
     return (
       <Marker
+        icon={iconToCategory[marker.type]}
         draggable
         position={marker.latlng}
         key={marker.id}
@@ -104,8 +132,7 @@ export default class MapContainer extends React.Component {
   }
 
   render() {
-    const {connectDropTarget} = this.props;
-    const {markers} = this.state;
+    const {connectDropTarget, markers} = this.props;
 
     return connectDropTarget(
       <div className="map-container">

@@ -20,7 +20,8 @@ body {
   width: 849px;
   height: 600px;
   margin: auto;
-  bottom: 50px;
+  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
   display: flex;
