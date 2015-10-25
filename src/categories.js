@@ -11,7 +11,7 @@ export default {
       'de': 'Freizeit',
       'en': 'Leisure',
     },
-    'icon': 'pinpoint.svg',
+    'icon': 'icon_playgruond.svg',
   },
   'kommunikation': {
     'name': {
@@ -60,20 +60,20 @@ export default {
       'de': 'Grundbedürfnisse',
       'en': 'Needs',
     },
-    'icon': 'pinpoint.svg',
+    'icon': 'icon_tafeln.svg',
   },
   'community': {
     'name': {
       'de': 'Community',
       'en': 'Community',
     },
-    'icon': 'pinpoint.svg',
+    'icon': 'icon_kulturverein.svg',
   },
   'family': {
     'name': {
       'de': 'Familie',
       'en': 'Family',
     },
-    'icon': 'pinpoint.svg',
+    'icon': 'icon_familycenter.svg',
   },
 };
