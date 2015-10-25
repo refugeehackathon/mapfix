@@ -1,3 +1,9 @@
+.fa-map-marker:before {
+  content: "\229A";
+  font-size: 24px;
+}
+
+
 .map-container {
   display: flex;
   flex-grow: 1;

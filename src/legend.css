@@ -1,6 +1,8 @@
 .legend-container {
   width: 180px;
   display: none;
+  position: absolute;
+  left: 100%;
 }
 
 .legend-entry {

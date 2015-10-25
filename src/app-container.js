@@ -18,9 +18,11 @@ export default class AppContainer extends React.Component {
     const {markers} = this.state;
     return (
       <div className="app-container">
-        <MapContainer markers={markers} onMarkersChange={newMarkers => this.setState({markers: newMarkers})}/>
-        <Sidebar/>
-        <Legend markers={markers}/>
+        <div className="app-map-container">
+          <MapContainer markers={markers} onMarkersChange={newMarkers => this.setState({markers: newMarkers})}/>
+          <Sidebar/>
+          <Legend markers={markers}/>
+        </div>
       </div>
     );
   }
