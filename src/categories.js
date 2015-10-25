@@ -4,7 +4,7 @@ export default {
       'de': 'Papers',
       'en': 'Papers',
     },
-    'icon': 'pinpoint.svg',
+    'icon': 'icon_papers.svg',
   },
   'freizeit': {
     'name': {
@@ -32,28 +32,28 @@ export default {
       'de': 'Shops',
       'en': 'Shops',
     },
-    'icon': 'pinpoint.svg',
+    'icon': 'icon_shop.svg',
   },
   'gesundheit': {
     'name': {
       'de': 'Gesundheit',
       'en': 'Health',
     },
-    'icon': 'pinpoint.svg',
+    'icon': 'icon_health.svg',
   },
   'support': {
     'name': {
       'de': 'Support',
       'en': 'Support',
     },
-    'icon': 'pinpoint.svg',
+    'icon': 'icon_support.svg',
   },
   'bildung': {
     'name': {
       'de': 'Bildung',
       'en': 'Education',
     },
-    'icon': 'pinpoint.svg',
+    'icon': 'icon_education.svg',
   },
   'needs': {
     'name': {
