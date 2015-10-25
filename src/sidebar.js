@@ -1,6 +1,8 @@
 import React from 'react';
 import {DragSource as dragSource} from 'react-dnd';
 
+import './sidebar.css';
+
 const cardSource = {
   beginDrag(props) {
     return {type: props.type};
@@ -17,10 +19,10 @@ class CategoryIcon {
   }
 
   render() {
-    const {connectDragSource} = this.props;
+    const {connectDragSource, type} = this.props;
 
     return connectDragSource(
-      <div>Drag Me</div>
+      <div className="sidebar-category-container">{type}</div>
     );
   }
 }
@@ -33,7 +35,17 @@ export default class Sidebar extends React.Component {
   render() {
     return (
       <div className="sidebar-container">
-        <CategoryIcon type="fun"/>
+        <div className="sidebar-contents">
+          <CategoryIcon type="health"/>
+          <CategoryIcon type="fun"/>
+          <CategoryIcon type="family"/>
+          <CategoryIcon type="hot spot"/>
+          <CategoryIcon type="food"/>
+          <CategoryIcon type="fun"/>
+          <CategoryIcon type="shopping"/>
+          <CategoryIcon type="pets"/>
+          <CategoryIcon type="mobility"/>
+        </div>
       </div>
     );
   }
