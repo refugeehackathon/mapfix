@@ -86,7 +86,7 @@ export default class MapContainer extends React.Component {
     if (openMarkerId) {
       this.refs[`marker-${openMarkerId}`].getLeafletElement().bindPopup("<div id='popup'/>").openPopup();
       this.openPopupNode = document.getElementById('popup');
-      React.render(<PopupContent markerId={openMarkerId}/>, this.openPopupNode);
+      React.render(<PopupContent markerId={openMarkerId} onClose={() => this.refs[`marker-${openMarkerId}`].getLeafletElement().closePopup()}/>, this.openPopupNode);
     }
     this.lastOpenMarkerId = openMarkerId;
   }

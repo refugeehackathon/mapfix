@@ -26,3 +26,25 @@ body {
   right: 0;
   display: flex;
 }
+
+.leaflet-popup {
+  min-width: 200px;
+  display: inline-block;
+}
+
+.leaflet-popup input {
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.1) inset;
+}
+
+.leaflet-popup button {
+  border: 1px solid #999;
+  background-color: #eee;
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
+#popup-input {
+  width: 120px;
+}

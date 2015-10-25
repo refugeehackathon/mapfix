@@ -1,5 +1,6 @@
 @media print {
   .leaflet-control,
+  .leaflet-popup,
   .sidebar-container {
     display: none;
   }
