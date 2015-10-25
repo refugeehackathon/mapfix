@@ -136,7 +136,7 @@ export default class MapContainer extends React.Component {
 
     return connectDropTarget(
       <div className="map-container">
-        <Map ref="map" className="map-content" center={[52.51, 13.37]} zoom={13} onLeafletClick={this.handleMapClick} onLeafletPopupclose={this.handlePopupClose}>
+        <Map ref="map" className="map-content" center={[53.1806048, 13.1300446]} zoom={13} onLeafletClick={this.handleMapClick} onLeafletPopupclose={this.handlePopupClose}>
           <TileLayer
             url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}"
             attribution="<a href='//openstreetmap.org' target='_blank'>OpenStreetMap</a> | <a href='//mapbox.com' target='_blank'>Mapbox</a>"
