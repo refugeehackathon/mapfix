@@ -81,8 +81,23 @@ export default class MapContainer extends React.Component {
     nextMarkerId += 1;
   }
 
+  handleMarkerDragEnd = (event, markerId) => {
+    const {markers} = this.state;
+    markers.find(marker => marker.id === markerId).latlng = event.target._latlng;
+    this.setState({markers});
+  }
+
   renderMarker(marker) {
-    return <Marker position={marker.latlng} key={marker.id} ref={`marker-${marker.id}`} onLeafletClick={() => this.setState({openMarkerId: marker.id})}/>;
+    return (
+      <Marker
+        draggable
+        position={marker.latlng}
+        key={marker.id}
+        ref={`marker-${marker.id}`}
+        onLeafletClick={() => this.setState({openMarkerId: marker.id})}
+        onLeafletDragend={(event) => this.handleMarkerDragEnd(event, marker.id)}
+      />
+    );
   }
 
   render() {
