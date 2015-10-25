@@ -7,12 +7,6 @@ const cardSource = {
   beginDrag(props) {
     return {type: props.type};
   },
-  // isDragging(props, monitor) {
-  //   console.log("InitialClientOffset()", monitor.getInitialClientOffset());
-  //   console.log("ClientOffset()", monitor.getClientOffset());
-  //   console.log("DifferenceFromInitialOffset()", monitor.getDifferenceFromInitialOffset());
-  //   console.log("SourceClientOffset()", monitor.getSourceClientOffset());
-  // }
 };
 
 @dragSource('CategoryIcon', cardSource, (connect) => ({
