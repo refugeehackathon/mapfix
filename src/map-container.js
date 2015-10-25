@@ -82,7 +82,7 @@ export default class MapContainer extends React.Component {
   }
 
   renderMarker(marker) {
-    return <Marker position={marker.latlng} key={marker.id} ref={`marker-${marker.id}`}/>;
+    return <Marker position={marker.latlng} key={marker.id} ref={`marker-${marker.id}`} onLeafletClick={() => this.setState({openMarkerId: marker.id})}/>;
   }
 
   render() {
