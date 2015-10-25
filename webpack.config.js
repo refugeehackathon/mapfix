@@ -17,6 +17,7 @@ module.exports = {
     loaders: [
       {test: /\.jsx?$/, loader: 'babel', include: srcPath},
       {test: /\.css$/, loader: 'style!css!postcss'},
+      {test: /\.json$/, loader: 'json'},
       {test: /\.(png|jpg|svg)([\?#].*)?$/, loader: 'file?name=[name]-[md5:hash:base62:8].[ext]'},
       {test: /\.(eot|ttf|woff2?)([\?#].*)?$/, loader: 'file?name=[name]-[md5:hash:base62:8].[ext]'}
     ]

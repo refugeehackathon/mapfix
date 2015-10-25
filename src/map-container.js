@@ -3,9 +3,24 @@ import {Map, Marker, TileLayer} from 'react-leaflet';
 import Leaflet from 'leaflet';
 import {DropTarget as dropTarget} from 'react-dnd';
 import PopupContent from './popup-content';
+import categories from './categories.js';
 
 import './map-container.css';
 import 'leaflet.locatecontrol';
+
+const iconToCategory = Object.keys(categories).reduce(
+  (memo, catName) => {
+    const description = categories[catName];
+    memo[catName] = Leaflet.icon({
+      iconUrl: require('./icons/' + description.icon),
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+      popupAnchor: [0, -50],
+    });
+    return memo;
+  },
+  {}
+);
 
 class DropListener {
   listener = null;
@@ -19,9 +34,9 @@ const dropListener = new DropListener();
 
 const cardTarget = {
   drop(props, monitor) {
-    const {type} = monitor.getItem();
-    const {x, y} = monitor.getClientOffset();
-    dropListener.justDropped({type, x, y});
+    const {type, width, height} = monitor.getItem();
+    const {x, y} = monitor.getSourceClientOffset();
+    dropListener.justDropped({type, x: x + width / 2 + 2, y: y + height - 5});
   },
 };
 
@@ -34,12 +49,11 @@ export default class MapContainer extends React.Component {
 
   static propTypes = {
     connectDropTarget: React.PropTypes.func.isRequired,
+    markers: React.PropTypes.array.isRequired,
+    onMarkersChange: React.PropTypes.func.isRequired,
   };
 
   state = {
-    markers: [
-      {id: 1, latlng: [52.51, 13.37], type: 'fun'},
-    ],
     openMarkerId: null,
   }
 
@@ -79,20 +93,22 @@ export default class MapContainer extends React.Component {
 
   handleMapClick = event => {
     if (!this.justDroppedType) return; // it has been a normal click, not a synthetic one
-    this.setState({markers: [...this.state.markers, {id: nextMarkerId, latlng: event.latlng, type: this.justDroppedType}], openMarkerId: nextMarkerId});
+    this.props.onMarkersChange([...this.props.markers, {id: nextMarkerId, latlng: event.latlng, type: this.justDroppedType}]);
+    this.setState({openMarkerId: nextMarkerId});
     this.justDroppedType = null;
     nextMarkerId += 1;
   }
 
   handleMarkerDragEnd = (event, markerId) => {
-    const {markers} = this.state;
+    const {markers} = this.props;
     markers.find(marker => marker.id === markerId).latlng = event.target._latlng;
-    this.setState({markers});
+    this.props.onMarkersChange(markers);
   }
 
   renderMarker(marker) {
     return (
       <Marker
+        icon={iconToCategory[marker.type]}
         draggable
         position={marker.latlng}
         key={marker.id}
@@ -104,8 +120,7 @@ export default class MapContainer extends React.Component {
   }
 
   render() {
-    const {connectDropTarget} = this.props;
-    const {markers} = this.state;
+    const {connectDropTarget, markers} = this.props;
 
     return connectDropTarget(
       <div className="map-container">

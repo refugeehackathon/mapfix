@@ -3,4 +3,8 @@
   .sidebar-container {
     display: none;
   }
+
+  .legend-container {
+    display: block;
+  }
 }

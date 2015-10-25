@@ -1,0 +1,26 @@
+.legend-container {
+  width: 180px;
+  display: none;
+}
+
+.legend-entry {
+  display: flex;
+  padding: 10px;
+}
+
+.legend-description-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 5px;
+}
+
+.legend-description {
+  font-size: 10px;
+}
+
+@media print {
+  .legend-container {
+    display: block;
+  }
+}
