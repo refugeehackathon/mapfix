@@ -12,8 +12,10 @@ export default class AppContainer extends React.Component {
   render() {
     return (
       <div className="app-container">
-        <MapContainer/>
-        <Sidebar/>
+        <div className="app-map-container">
+          <MapContainer/>
+          <Sidebar/>
+        </div>
       </div>
     );
   }

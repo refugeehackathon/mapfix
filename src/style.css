@@ -14,3 +14,14 @@ body {
   display: flex;
   height: 100%;
 }
+
+.app-map-container {
+  position: absolute;
+  width: 849px;
+  height: 600px;
+  margin: auto;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  display: flex;
+}
