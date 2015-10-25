@@ -49,7 +49,7 @@ export default class MapContainer extends React.Component {
       this.justDroppedType = type;
       const evt = new MouseEvent('click', {clientX: x, clientY: y});
       evt._simulated = true; // don't ask. Just believe me, it's necessary...
-      React.findDOMNode(this).dispatchEvent(evt);
+      React.findDOMNode(this.refs.map).dispatchEvent(evt);
     };
   }
 
