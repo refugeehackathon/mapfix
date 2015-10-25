@@ -1,12 +1,14 @@
 import React from 'react';
 import {Map, Marker, TileLayer} from 'react-leaflet';
+import Leaflet from 'leaflet';
 import {DropTarget as dropTarget} from 'react-dnd';
 import PopupContent from './popup-content';
 
 import './map-container.css';
+import 'leaflet.locatecontrol';
 
 class DropListener {
-  listener = null
+  listener = null;
 
   justDropped({type, x, y}) {
     if (this.listener) this.listener({type, x, y});
@@ -42,6 +44,7 @@ export default class MapContainer extends React.Component {
   }
 
   componentDidMount() {
+    Leaflet.control.locate().addTo(this.refs.map.getLeafletElement());
     dropListener.listener = ({type, x, y}) => {
       this.justDroppedType = type;
       const evt = new MouseEvent('click', {clientX: x, clientY: y});
@@ -105,17 +108,19 @@ export default class MapContainer extends React.Component {
     const {markers} = this.state;
 
     return connectDropTarget(
-      <Map className="map-container" center={[52.51, 13.37]} zoom={13} onLeafletClick={this.handleMapClick} onLeafletPopupclose={this.handlePopupClose}>
-        <TileLayer
-          url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}"
-          attribution="<a href='//openstreetmap.org' target='_blank'>OpenStreetMap</a> | <a href='//mapbox.com' target='_blank'>Mapbox</a>"
-          accessToken="pk.eyJ1IjoiZG9uc2Nob2UiLCJhIjoiMkN5RUk0QSJ9.FGcEYWjfgcJUmSyN1tkwgQ"
-          noWrap
-          continuousWorld={false}
-          id="mapbox.light"
-        />
-        {markers.map(marker => this.renderMarker(marker))}
-      </Map>
+      <div className="map-container">
+        <Map ref="map" className="map-content" center={[52.51, 13.37]} zoom={13} onLeafletClick={this.handleMapClick} onLeafletPopupclose={this.handlePopupClose}>
+          <TileLayer
+            url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}"
+            attribution="<a href='//openstreetmap.org' target='_blank'>OpenStreetMap</a> | <a href='//mapbox.com' target='_blank'>Mapbox</a>"
+            accessToken="pk.eyJ1IjoiZG9uc2Nob2UiLCJhIjoiMkN5RUk0QSJ9.FGcEYWjfgcJUmSyN1tkwgQ"
+            noWrap
+            continuousWorld={false}
+            id="mapbox.light"
+          />
+          {markers.map(marker => this.renderMarker(marker))}
+        </Map>
+      </div>
     );
   }
 }
