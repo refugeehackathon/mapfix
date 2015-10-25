@@ -1,0 +1,79 @@
+{
+    "papers": {
+    "name": {
+        "de": "Papers",
+        "en": "Papers"
+    },
+    "icon": "icon.svg"
+    },
+    "freizeit": {
+    "name": {
+        "de": "Freizeit",
+        "en": "Leisure"
+    },
+    "icon": "icon.svg"
+    },
+    "kommunikation": {
+    "name": {
+        "de": "Kommunikation",
+        "en": "Communication"
+    },
+    "icon": "icon.svg"
+    },
+    "mobilität": {
+    "name": {
+        "de": "Mobilität",
+        "en": "Mobility"
+    },
+    "icon": "icon.svg"
+    },
+    "shops": {
+    "name": {
+        "de": "Shops",
+        "en": "Shops"
+    },
+    "icon": "icon.svg"
+    },
+    "gesundheit" : {
+    "name": {
+        "de": "Gesundheit",
+        "en": "Health"
+    },
+    "icon": "icon.svg"
+    },
+    "support": {
+    "name": {
+        "de": "Support",
+        "en": "Support"
+    },
+    "icon": "icon.svg"
+    },
+    "bildung": {
+    "name": {
+        "de": "Bildung",
+        "en": "Education"
+    },
+    "icon": "icon.svg"
+    },
+    "needs": {
+    "name": {
+        "de": "Grundbedürfnisse",
+        "en": "Needs"
+    },
+    "icon": "icon.svg"
+    },
+    "community": {
+    "name": {
+        "de": "Community",
+        "en": "Community"
+    },
+    "icon": "icon.svg"
+    },
+    "family": {
+    "name": {
+        "de": "Familie",
+        "en": "Family"
+    },
+    "icon": "icon.svg"
+    }
+}
