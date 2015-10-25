@@ -1,6 +1,7 @@
 import React from 'react';
 import MapContainer from './map-container';
 import Sidebar from './sidebar';
+import Legend from './legend';
 import {DragDropContext as dragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
@@ -19,6 +20,7 @@ export default class AppContainer extends React.Component {
       <div className="app-container">
         <MapContainer markers={markers} onMarkersChange={newMarkers => this.setState({markers: newMarkers})}/>
         <Sidebar/>
+        <Legend markers={markers}/>
       </div>
     );
   }
