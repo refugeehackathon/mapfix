@@ -49,10 +49,11 @@ export default class MapContainer extends React.Component {
 
   static propTypes = {
     connectDropTarget: React.PropTypes.func.isRequired,
+    markers: React.PropTypes.array.isRequired,
+    onMarkersChange: React.PropTypes.func.isRequired,
   };
 
   state = {
-    markers: [],
     openMarkerId: null,
   }
 
@@ -92,15 +93,16 @@ export default class MapContainer extends React.Component {
 
   handleMapClick = event => {
     if (!this.justDroppedType) return; // it has been a normal click, not a synthetic one
-    this.setState({markers: [...this.state.markers, {id: nextMarkerId, latlng: event.latlng, type: this.justDroppedType}], openMarkerId: nextMarkerId});
+    this.props.onMarkersChange([...this.props.markers, {id: nextMarkerId, latlng: event.latlng, type: this.justDroppedType}]);
+    this.setState({openMarkerId: nextMarkerId});
     this.justDroppedType = null;
     nextMarkerId += 1;
   }
 
   handleMarkerDragEnd = (event, markerId) => {
-    const {markers} = this.state;
+    const {markers} = this.props;
     markers.find(marker => marker.id === markerId).latlng = event.target._latlng;
-    this.setState({markers});
+    this.props.onMarkersChange(markers);
   }
 
   renderMarker(marker) {
@@ -118,8 +120,7 @@ export default class MapContainer extends React.Component {
   }
 
   render() {
-    const {connectDropTarget} = this.props;
-    const {markers} = this.state;
+    const {connectDropTarget, markers} = this.props;
 
     return connectDropTarget(
       <div className="map-container">
