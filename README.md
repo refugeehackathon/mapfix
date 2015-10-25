@@ -6,6 +6,10 @@ Based on open street map - provide ready icons/symbols for points of interests
 (doctor, supermarket, primary school, etc.) to drag and drop on the map. Provide
 legend explaining symbols in relevant refugee languages. Make it easy printable.
 
+## Demo:
+
+http://projects.danielberndt.net/mapfix/
+
 ## How to run locally
 
 Requires nodejs & npm.
