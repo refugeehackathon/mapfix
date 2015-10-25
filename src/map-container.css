@@ -1,3 +1,10 @@
-.map-container {
-  flex-grow: 1;
+.map-container ,.map-content{
+  width: 849px;
+  height: 600px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 50px;
+  left: 0;
+  right: 0;
 }
