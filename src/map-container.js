@@ -4,6 +4,7 @@ import Leaflet from 'leaflet';
 import {DropTarget as dropTarget} from 'react-dnd';
 import PopupContent from './popup-content';
 import categories from './categories.js';
+import i18n from './i18n.js';
 
 import './map-container.css';
 import 'leaflet.locatecontrol';
@@ -34,17 +35,26 @@ const dropListener = new DropListener();
 
 const cardTarget = {
   drop(props, monitor) {
-    const {type, width, height} = monitor.getItem();
-    const {x, y} = monitor.getSourceClientOffset();
-    dropListener.justDropped({type, x: x + width / 2 + 2, y: y + height - 5});
+    const {type} = monitor.getItem();
+    const {x, y} = monitor.getClientOffset();
+    dropListener.justDropped({type, x, y});
   },
 };
 
 let nextMarkerId = 2;
+let userLanguage = window.navigator.languages ? window.navigator.languages[0] : null;
+userLanguage = userLanguage || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage;
+if (userLanguage.indexOf('-') !== -1) {
+  userLanguage = userLanguage.split('-')[0];
+}
+if (userLanguage.indexOf('_') !== -1) {
+  userLanguage = userLanguage.split('_')[0];
+}
 
 @dropTarget('CategoryIcon', cardTarget, (connect) => ({
   connectDropTarget: connect.dropTarget(),
 }))
+
 export default class MapContainer extends React.Component {
 
   static propTypes = {
@@ -57,7 +67,9 @@ export default class MapContainer extends React.Component {
   }
 
   componentDidMount() {
-    Leaflet.control.locate().addTo(this.refs.map.getLeafletElement());
+    const locateMeStringRoot = i18n.leaflet.locateme;
+    const locateMeString = locateMeStringRoot.hasOwnProperty(userLanguage) ? locateMeStringRoot[userLanguage] : locateMeStringRoot.en;
+    Leaflet.control.locate({strings: { title: locateMeString}}).addTo(this.refs.map.getLeafletElement());
     dropListener.listener = ({type, x, y}) => {
       this.justDroppedType = type;
       const evt = new MouseEvent('click', {clientX: x, clientY: y});
