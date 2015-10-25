@@ -2,6 +2,9 @@ import React from 'react';
 
 export default class PopupContent extends React.Component {
 
+  static propTypes = {
+    onClose: React.PropTypes.func.isRequired,
+  };
 
   render() {
     return (
