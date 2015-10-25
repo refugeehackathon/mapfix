@@ -1,0 +1,35 @@
+{
+    "papers": {
+	"icon": "icon.svg"
+    },
+    "freizeit": {
+	"icon": "icon.svg"
+    },
+    "kommunikation": {
+	"icon": "icon.svg"
+    },
+    "mobilität": {
+	"icon": "icon.svg"
+    },
+    "shops": {
+	"icon": "icon.svg"
+    },
+    "gesundheit" : {
+	"icon": "icon.svg"
+    },
+    "support": {
+	"icon": "icon.svg"
+    },
+    "bildung": {
+	"icon": "icon.svg"
+    },
+    "needs": {
+	"icon": "icon.svg"
+    },
+    "community": {
+	"icon": "icon.svg"
+    },
+    "family": {
+	"icon": "icon.svg"
+    }
+}

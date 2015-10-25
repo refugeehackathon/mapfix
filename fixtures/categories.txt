@@ -1,0 +1,70 @@
+papers
+    polizei
+    behörden
+    anwalt
+
+freizeit
+    park
+    club/konzert
+    sportplatz
+    sportverein
+    outdoor activity
+    fitness center
+    internet cafe
+
+kommunikation
+    spätis
+    simkarten
+    free hotspots
+    money transfer
+
+mobilität
+    öffis (bvg)
+    fahrradwerkstatt
+    mitfahrgelegenheit
+    fernbahnhöfe
+    bus und bahn
+
+shops
+    supermarkt
+    drogerie
+    flohmarkt
+    second hand läden
+
+gesundheit
+    apotheke
+    arzt
+    therapie
+    hebamme
+    krankenhaus
+
+support
+    arbeit
+    flüchtlingsinitiative
+    beratunsstelle
+    frauenberatung
+    transitsupport
+    dolmetscher
+
+bildung
+    sprachkurse
+    bildungsorientierung
+    flüchtlingsunis
+
+needs (grundbedürfnisse)
+    öffentliche duschen
+    öffentliche toiletten
+    bahnhofsmission
+    obdachlosenunterkunft
+    tafel
+
+community
+    religiöse gemeinde
+    kulturvereine
+
+family
+    familienzentren
+    spielplatz
+    schule
+    kita
+    kindergarten
