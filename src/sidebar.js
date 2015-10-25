@@ -4,8 +4,9 @@ import categories from './categories.js';
 import './sidebar.css';
 
 const cardSource = {
-  beginDrag(props) {
-    return {type: props.type};
+  beginDrag(props, monitor, component) {
+    const node = React.findDOMNode(component);
+    return {type: props.type, width: node.offsetWidth, height: node.offsetHeight};
   },
 };
 

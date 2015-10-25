@@ -34,9 +34,9 @@ const dropListener = new DropListener();
 
 const cardTarget = {
   drop(props, monitor) {
-    const {type} = monitor.getItem();
-    const {x, y} = monitor.getClientOffset();
-    dropListener.justDropped({type, x, y});
+    const {type, width, height} = monitor.getItem();
+    const {x, y} = monitor.getSourceClientOffset();
+    dropListener.justDropped({type, x: x + width / 2 + 2, y: y + height - 5});
   },
 };
 
