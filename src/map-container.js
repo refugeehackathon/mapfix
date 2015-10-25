@@ -3,9 +3,24 @@ import {Map, Marker, TileLayer} from 'react-leaflet';
 import Leaflet from 'leaflet';
 import {DropTarget as dropTarget} from 'react-dnd';
 import PopupContent from './popup-content';
+import categories from './categories.js';
 
 import './map-container.css';
 import 'leaflet.locatecontrol';
+
+const iconToCategory = Object.keys(categories).reduce(
+  (memo, catName) => {
+    const description = categories[catName];
+    memo[catName] = Leaflet.icon({
+      iconUrl: require('./icons/' + description.icon),
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+      popupAnchor: [0, -50],
+    });
+    return memo;
+  },
+  {}
+);
 
 class DropListener {
   listener = null;
@@ -37,9 +52,7 @@ export default class MapContainer extends React.Component {
   };
 
   state = {
-    markers: [
-      {id: 1, latlng: [52.51, 13.37], type: 'fun'},
-    ],
+    markers: [],
     openMarkerId: null,
   }
 
@@ -93,6 +106,7 @@ export default class MapContainer extends React.Component {
   renderMarker(marker) {
     return (
       <Marker
+        icon={iconToCategory[marker.type]}
         draggable
         position={marker.latlng}
         key={marker.id}

@@ -1,12 +1,18 @@
 import React from 'react';
 import {DragSource as dragSource} from 'react-dnd';
-
+import categories from './categories.js';
 import './sidebar.css';
 
 const cardSource = {
   beginDrag(props) {
     return {type: props.type};
   },
+  // isDragging(props, monitor) {
+  //   console.log("InitialClientOffset()", monitor.getInitialClientOffset());
+  //   console.log("ClientOffset()", monitor.getClientOffset());
+  //   console.log("DifferenceFromInitialOffset()", monitor.getDifferenceFromInitialOffset());
+  //   console.log("SourceClientOffset()", monitor.getSourceClientOffset());
+  // }
 };
 
 @dragSource('CategoryIcon', cardSource, (connect) => ({
@@ -19,10 +25,12 @@ class CategoryIcon {
   }
 
   render() {
-    const {connectDragSource, type} = this.props;
+    const {connectDragSource, description} = this.props;
 
     return connectDragSource(
-      <div className="sidebar-category-container">{type}</div>
+      <div className="sidebar-category-container">
+        <img className="sidebar-category-icon" src={require('./icons/' + description.icon)}/>
+      </div>
     );
   }
 }
@@ -36,15 +44,7 @@ export default class Sidebar extends React.Component {
     return (
       <div className="sidebar-container">
         <div className="sidebar-contents">
-          <CategoryIcon type="health"/>
-          <CategoryIcon type="fun"/>
-          <CategoryIcon type="family"/>
-          <CategoryIcon type="hot spot"/>
-          <CategoryIcon type="food"/>
-          <CategoryIcon type="fun"/>
-          <CategoryIcon type="shopping"/>
-          <CategoryIcon type="pets"/>
-          <CategoryIcon type="mobility"/>
+          {Object.keys(categories).map(catName => <CategoryIcon key={catName} type={catName} description={categories[catName]}/>)}
         </div>
       </div>
     );
